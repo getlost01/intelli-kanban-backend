@@ -17,7 +17,8 @@ app.listen(process.env.PORT || 8000, function(){
     console.log("➡️ ChatGPT Server listening on port %d in %s mode 👍", this.address().port, app.settings.env);
 });
 
-
+// Routes calling
+app.use("/api/chat", chatsRoutes);
 
 // default 404
 app.get("*", (req, res) => {
