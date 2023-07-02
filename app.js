@@ -6,6 +6,7 @@ import * as dotenv from "dotenv";
 import chatsRoutes from "./routes/chats.js";
 import boardsRoutes from "./routes/board.js";
 import cardRoutes from "./routes/card.js";
+import columnRoutes from "./routes/column.js";
 import connectdb from './config/db.js';
 
 dotenv.config();
@@ -27,6 +28,7 @@ app.listen(process.env.PORT || 8000, function(){
 app.use("/api/chat", chatsRoutes);
 app.use("/api/board", boardsRoutes);
 app.use("/api/card", cardRoutes);
+app.use("/api/column", columnRoutes);
 
 // default 404
 app.get("*", (req, res) => {

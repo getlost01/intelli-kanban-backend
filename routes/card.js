@@ -1,11 +1,8 @@
 import express from "express";
 import { v4 as uuidv4 } from 'uuid';
-import Board from "../models/board.js";
 import Card from "../models/card.js";
-import Column from "../models/column.js";
 const router = express.Router();
 import * as dotenv from 'dotenv'; 
-import column from "../models/column.js";
 dotenv.config();
 
 // Create card
@@ -52,6 +49,24 @@ router.put("/:id", async (req, res) => {
         const response = await Card.updateOne({id: id}, payload);
 
         res.status(200).send({ message: "Card Updated" }); 
+	} catch (error) {
+        console.log(error);
+		res.status(500).send({ message: "Internal Server Error" });
+	}
+});
+
+router.delete("/:id", async (req, res) => {
+	try {
+        const { id } = req.params;
+        const card = await Card.findOne({ id: id });
+        if(!card) {
+            res.status(404).send({ message: "Card Not Found" });
+            return;
+        }
+
+        const response = await Card.deleteOne({id: id});
+
+        res.status(200).send({ message: "Card Deleted" }); 
 	} catch (error) {
         console.log(error);
 		res.status(500).send({ message: "Internal Server Error" });
