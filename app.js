@@ -7,6 +7,7 @@ import chatsRoutes from "./routes/chats.js";
 import boardsRoutes from "./routes/board.js";
 import cardRoutes from "./routes/card.js";
 import columnRoutes from "./routes/column.js";
+import userRoutes from "./routes/user.js"; 
 import connectdb from './config/db.js';
 
 dotenv.config();
@@ -29,6 +30,7 @@ app.use("/api/chat", chatsRoutes);
 app.use("/api/board", boardsRoutes);
 app.use("/api/card", cardRoutes);
 app.use("/api/column", columnRoutes);
+app.use("/api/user", userRoutes);
 
 // default 404
 app.get("*", (req, res) => {

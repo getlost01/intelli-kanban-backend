@@ -13,7 +13,6 @@ dotenv.config();
 router.post("/create", async (req, res) => {
 	try {
         const uniqueId = uuidv4();
-
 		const { name, description, access } = req.body;
         const payload = {
             id: uniqueId,
@@ -50,10 +49,10 @@ router.post("/create", async (req, res) => {
 
         await new Board({ ...payload}).save();
 
-		res.status(200).send({ message: "Board Created", payload }); 
+		res.status(200).send({ error: false, message: "Board Created", board: payload }); 
 	} catch (error) {
 		console.log(error);
-		res.status(500).send({ message: "Internal Server Error" });
+		res.status(500).send({ error: true, message: "Internal Server Error" });
 	}
 });
 
