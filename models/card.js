@@ -9,7 +9,7 @@ const cardSchema = new Schema({
 	taskBreakdown: { type: String, required: false },
 	completed: { type: Boolean, required: false, default: false },
 	priority: { type: String, required: false, default: "low" },
-	lastUpdated: { type: Date, default: Date.now, expires: 3600 },
+	lastUpdated: { type: Date, default: Date.now },
 });
 
 export default mongoose.model("Card", cardSchema);
