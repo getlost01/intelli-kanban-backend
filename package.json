@@ -1,5 +1,5 @@
 {
-  "name": "chatgpt-server",
+  "name": "chatgptserver",
   "version": "1.0.0",
   "description": "This is a server for fetching chatgpt API",
   "main": "app.js",
