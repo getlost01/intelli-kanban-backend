@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const columnSchema = new Schema({
 	id : { type: String, required: true },
 	name: { type: String, required: true },
-	cards: { type: Array, required: true, default: [] },
+	cardIds: { type: Array, required: true, default: [] },
 	lastUpdated: { type: Date, default: Date.now, expires: 3600 },
 });
 

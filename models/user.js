@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
 	userName: { type: String, required: true },
 	avatar: { type: String, required: false },
 	password: { type: String, required: true },
+	boardIDs: { type: Array, required: false, default: [] },
 	recentBoard: { type: String, required: false },
 });
 

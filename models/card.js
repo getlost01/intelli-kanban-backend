@@ -8,6 +8,7 @@ const cardSchema = new Schema({
 	assignee: { type: Array, required: false, default: [] },
 	taskBreakdown: { type: String, required: false },
 	completed: { type: Boolean, required: false, default: false },
+	priority: { type: String, required: false, default: "low" },
 	lastUpdated: { type: Date, default: Date.now, expires: 3600 },
 });
 
