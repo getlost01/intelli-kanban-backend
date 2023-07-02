@@ -11,12 +11,13 @@ router.post("/login", async (req, res) => {
 	try {
 		const { email, password } = req.body;
 
-        const user = User.find({email: email});
+        const user = User.findOne({email});
         if(!user) {
-            res.status(404).send({ error: true, message: "User Not Found" });
+            res.status(200).send({ error: true, message: "User Not Found" });
+            return;
         }
         if(user.password !== password) {
-            res.status(404).send({ error: true, message: "Incorrect Password" });
+            res.status(200).send({ error: true, message: "Incorrect Password" });
         }
 
 		res.status(200).send({ error: false, message: "User get logined", user: user }); 
@@ -30,7 +31,7 @@ router.post("/login", async (req, res) => {
 router.post("/signup", async (req, res) => {
 	try {
         const uniqueId = uuidv4();
-        const { firstName, LastName, email, password } = req.body;
+        const { firstName, lastName, email, password } = req.body;
         const payload = {
             id: uniqueId,
             firstName,
@@ -39,9 +40,9 @@ router.post("/signup", async (req, res) => {
             password,
         }
 
-        const checkUser = User.find({email: email});
-        if(checkUser.length > 0) {
-            res.status(404).send({ error: true, message: "User Already Exists" });
+        const canUser = await User.findOne({email});
+        if(canUser) {
+            res.status(200).send({ error: true, message: "User Already Exists" });
             return;
         }
 
