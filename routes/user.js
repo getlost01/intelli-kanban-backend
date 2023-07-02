@@ -11,13 +11,14 @@ router.post("/login", async (req, res) => {
 	try {
 		const { email, password } = req.body;
 
-        const user = User.findOne({email});
+        const user = await User.findOne({email});
         if(!user) {
             res.status(200).send({ error: true, message: "User Not Found" });
             return;
         }
         if(user.password !== password) {
             res.status(200).send({ error: true, message: "Incorrect Password" });
+            return;
         }
 
 		res.status(200).send({ error: false, message: "User get logined", user: user }); 
