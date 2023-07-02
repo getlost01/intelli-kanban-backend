@@ -4,6 +4,8 @@ import * as dotenv from "dotenv";
 
 // Routes
 import chatsRoutes from "./routes/chats.js";
+import boardsRoutes from "./routes/board.js";
+import connectdb from './config/db.js';
 
 dotenv.config();
 
@@ -12,13 +14,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
 app.use(cors());
 
+// Connect to MongoDB
+connectdb();
+
 // Express server config and listen
 app.listen(process.env.PORT || 8000, function(){
-    console.log("➡️ ChatGPT Server listening on port %d in %s mode 👍", this.address().port, app.settings.env);
+    console.log("➡️ Intelli-Kanban Server listening on port %d in %s mode 👍", this.address().port, app.settings.env);
 });
 
 // Routes calling
 app.use("/api/chat", chatsRoutes);
+app.use("/api/board", boardsRoutes);
 
 // default 404
 app.get("*", (req, res) => {
