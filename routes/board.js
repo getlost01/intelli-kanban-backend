@@ -62,6 +62,12 @@ router.post("/create", async (req, res) => {
 router.get("/:id", async (req, res) => {
 	try {
         const { id } = req.params;
+        const can = await boardColl.findOne({id: id});
+        if(can) {
+            res.status(200).send({ message: "Board Fetched", boarddata: can, through: "can" }); 
+            return;
+        }
+
         const board = await Board.findOne({ id: id });
         if(!board) {
             res.status(404).send({ message: "Board Not Found" });
@@ -81,14 +87,10 @@ router.get("/:id", async (req, res) => {
             },
             access: board.access,
         }
-        
-        const can = await boardColl.findOne({id: id});
-        if(!can) {
-            await new boardColl({ ...boarddata}).save();
-        }else {
-            res.status(200).send({ message: "Board Fetched", boarddata: can }); 
-            return;
-        }
+
+
+        await new boardColl({ ...boarddata}).save();
+        console.log("saved");
 
         res.status(200).send({ message: "Board Fetched", boarddata }); 
 	} catch (error) {
