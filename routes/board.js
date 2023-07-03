@@ -107,7 +107,7 @@ router.post("/update", async (req, res) => {
             return;
         }
 
-        const response = await boardColl.updateOne({id: id}, board);
+        const response = await boardColl.updateOne({id: id}, {board});
 
 		res.status(200).send({ error: false, message: "Updated"}); 
 	} catch (error) {
