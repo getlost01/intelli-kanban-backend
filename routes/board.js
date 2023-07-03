@@ -8,6 +8,7 @@ import defaultData from "./defaultData/board.js";
 const router = express.Router();
 import * as dotenv from 'dotenv'; 
 import column from "../models/column.js";
+import template from "./defaultData/template.js";
 dotenv.config();
 
 // Create kanban board
@@ -49,7 +50,6 @@ router.post("/create", async (req, res) => {
         });
 
         await new Board({ ...payload}).save();
-
 		res.status(200).send({ error: false, message: "Board Created", board: payload }); 
 	} catch (error) {
 		console.log(error);
@@ -74,25 +74,19 @@ router.get("/:id", async (req, res) => {
             return;
         }
 
-        const columns = await Column.find({ id: { $in: board.columns } });
-        const cards = await Card.find({ id: { $in: board.cards } });
-        const boarddata = {
+        const defaultPay = {
             id: board.id,
             boardName: board.boardName,
             boardDescription: board.boardDescription,
-            board:{
-                cards: cards,
-                columns: columns,
-                columnOrder: board.columnOrder,
-            },
+            board: template,
             access: board.access,
         }
 
 
-        await new boardColl({ ...boarddata}).save();
-        console.log("saved");
+        await new boardColl({ ...defaultPay}).save();
+        console.log(defaultPay, "defaultPay");
 
-        res.status(200).send({ message: "Board Fetched", boarddata }); 
+        res.status(200).send({ message: "Board Fetched", boarddata: defaultPay, through: "default" }); 
 	} catch (error) {
         console.log(error);
 		res.status(500).send({ message: "Internal Server Error" });
