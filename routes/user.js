@@ -28,7 +28,7 @@ router.post("/login", async (req, res) => {
 	}
 });
 
-
+// Sign up
 router.post("/signup", async (req, res) => {
 	try {
         const uniqueId = uuidv4();

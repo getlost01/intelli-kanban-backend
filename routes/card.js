@@ -55,6 +55,7 @@ router.put("/:id", async (req, res) => {
 	}
 });
 
+// Delete card by ID
 router.delete("/:id", async (req, res) => {
 	try {
         const { id } = req.params;

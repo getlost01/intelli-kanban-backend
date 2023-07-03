@@ -27,7 +27,7 @@ router.post("/create", async (req, res) => {
 	}
 });
 
-
+// Delete column Id
 router.delete("/:id", async (req, res) => {
 	try {
         const { id } = req.params;

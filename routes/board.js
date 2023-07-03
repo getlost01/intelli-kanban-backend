@@ -84,7 +84,6 @@ router.get("/:id", async (req, res) => {
 
 
         await new boardColl({ ...defaultPay}).save();
-        console.log(defaultPay, "defaultPay");
 
         res.status(200).send({ message: "Board Fetched", boarddata: defaultPay, through: "default" }); 
 	} catch (error) {
